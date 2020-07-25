@@ -1,0 +1,211 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Coral",
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#numeric-literal"
+    },
+    {
+      "include": "#boolean-literal"
+    },
+    {
+      "include": "#nil-literal"
+    },
+    {
+      "include": "#this-literal"
+    },
+    {
+      "include": "#super-literal"
+    },
+    {
+      "include": "#arrow-hint"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.language.coral",
+          "match": "\\b(import|package|from|as|enum|break|continue|return|var|val|if|elif|else|switch|default|case|while|for|each|in|fn|class|interface|static|new|nil|try|catch|finally|throws)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.coral",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.coral",
+          "match": "\\\\[abtvnrf\"'\\\\]"
+        },
+        {
+          "name": "constant.character.escape.u.coral",
+          "match": "\\\\u[0-9A-Fa-f]{4}"
+        },
+        {
+          "name": "constant.character.escape.x.coral",
+          "match": "\\\\x[0-9A-Fa-f]{2}"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.coral",
+          "begin": "(\\/\\*)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.comment.coral"
+            }
+          },
+          "end": "(\\*\\/)",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.comment.coral"
+            }
+          }
+        },
+        {
+          "name": "comment.line.double-slash.coral",
+          "begin": "(\\/\\/)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.comment.coral"
+            }
+          },
+          "end": "(?:\\n|$)"
+        }
+      ]
+    },
+    "numeric-literal": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.coral",
+          "match": "\\b(?<!\\$)0(?:x|X)[0-9a-fA-F][0-9a-fA-F_]*(n)?\\b(?!\\$)",
+          "captures": {
+            "1": {
+              "name": "storage.type.numeric.bigint.coral"
+            }
+          }
+        },
+        {
+          "name": "constant.numeric.binary.coral",
+          "match": "\\b(?<!\\$)0(?:b|B)[01][01_]*(n)?\\b(?!\\$)",
+          "captures": {
+            "1": {
+              "name": "storage.type.numeric.bigint.coral"
+            }
+          }
+        },
+        {
+          "name": "constant.numeric.octal.coral",
+          "match": "\\b(?<!\\$)0(?:o|O)?[0-7][0-7_]*(n)?\\b(?!\\$)",
+          "captures": {
+            "1": {
+              "name": "storage.type.numeric.bigint.coral"
+            }
+          }
+        },
+        {
+          "match": "(?x)\n(?<!\\$)(?:\n  (?:\\b[0-9][0-9_]*(\\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\\b)| # 1.1E+3\n  (?:\\b[0-9][0-9_]*(\\.)[eE][+-]?[0-9][0-9_]*(n)?\\b)|             # 1.E+3\n  (?:\\B(\\.)[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\\b)|             # .1E+3\n  (?:\\b[0-9][0-9_]*[eE][+-]?[0-9][0-9_]*(n)?\\b)|                 # 1E+3\n  (?:\\b[0-9][0-9_]*(\\.)[0-9][0-9_]*(n)?\\b)|                      # 1.1\n  (?:\\b[0-9][0-9_]*(\\.)(n)?\\B)|                                  # 1.\n  (?:\\B(\\.)[0-9][0-9_]*(n)?\\b)|                                  # .1\n  (?:\\b[0-9][0-9_]*(n)?\\b(?!\\.))                                 # 1\n)(?!\\$)",
+          "captures": {
+            "0": {
+              "name": "constant.numeric.decimal.coral"
+            },
+            "1": {
+              "name": "meta.delimiter.decimal.period.coral"
+            },
+            "2": {
+              "name": "storage.type.numeric.bigint.coral"
+            },
+            "3": {
+              "name": "meta.delimiter.decimal.period.coral"
+            },
+            "4": {
+              "name": "storage.type.numeric.bigint.coral"
+            },
+            "5": {
+              "name": "meta.delimiter.decimal.period.coral"
+            },
+            "6": {
+              "name": "storage.type.numeric.bigint.coral"
+            },
+            "7": {
+              "name": "storage.type.numeric.bigint.coral"
+            },
+            "8": {
+              "name": "meta.delimiter.decimal.period.coral"
+            },
+            "9": {
+              "name": "storage.type.numeric.bigint.coral"
+            },
+            "10": {
+              "name": "meta.delimiter.decimal.period.coral"
+            },
+            "11": {
+              "name": "storage.type.numeric.bigint.coral"
+            },
+            "12": {
+              "name": "meta.delimiter.decimal.period.coral"
+            },
+            "13": {
+              "name": "storage.type.numeric.bigint.coral"
+            },
+            "14": {
+              "name": "storage.type.numeric.bigint.coral"
+            }
+          }
+        }
+      ]
+    },
+    "boolean-literal": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.true.coral",
+          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))true(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+        },
+        {
+          "name": "constant.language.boolean.false.coral",
+          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))false(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+        }
+      ]
+    },
+    "nil-literal": {
+      "name": "constant.language.null.coral",
+      "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))nil(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+    },
+    "this-literal": {
+      "name": "variable.language.this.coral",
+      "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))this\\b(?!\\$)"
+    },
+    "super-literal": {
+      "name": "variable.language.super.coral",
+      "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))super\\b(?!\\$)"
+    },
+    "arrow-hint": {
+      "patterns": [
+        {
+          "name": "meta.arrow.coral",
+          "begin": "->",
+          "beginCaptures": {
+            "0": {
+              "name": "storage.type.function.arrow.coral"
+            }
+          },
+          "end": "((?<=\\}|\\S)(?<!->)|((?!\\{)(?=\\S)))(?!\\/[\\/\\*])"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.coral"
+}

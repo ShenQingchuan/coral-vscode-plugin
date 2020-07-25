@@ -1,0 +1,7 @@
+{
+  "function-declaration": {
+    "prefix": "fn",
+    "body": ["fn ${1:name}(${2:params} ${3:type}) ${4:returns} {", "\t$0", "}"],
+    "description": "Function Declaration Statement"
+  }
+}

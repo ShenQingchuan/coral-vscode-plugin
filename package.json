@@ -1,0 +1,43 @@
+{
+  "name": "coral-language-plugin",
+  "displayName": "coral-language-plugin",
+  "description": "Coral programming language plugin for VSCode.",
+  "version": "0.0.1",
+  "icon": "icons/icon.png",
+  "publisher": "shenqingchuan",
+  "engines": {
+    "vscode": "^1.47.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "coral",
+        "aliases": [
+          "Coral",
+          "coral"
+        ],
+        "extensions": [
+          ".coral",
+          ".cr"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "coral",
+        "scopeName": "source.coral",
+        "path": "./syntaxes/coral.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "coral",
+        "path": "./snippets/coral.json"
+      }
+    ]
+  }
+}
